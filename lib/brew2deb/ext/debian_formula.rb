@@ -111,7 +111,7 @@ class DebianFormula < Formula
     f.pkgdir    = env.package_dir
     f.outputdir = env.output_dir
 
-    unless RUBY_PLATFORM =~ /darwin/
+    unless RUBY_PLATFORM =~ /darwin/ || ENV['BREW2DEB_NO_DPKG']
       # Check for build deps.
       system '/usr/bin/dpkg-checkbuilddeps', '-d', f.class.build_depends.join(', '), '/dev/null'
       if $? != 0
